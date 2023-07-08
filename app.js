@@ -85,7 +85,7 @@ app.get('/register', (req, res) => {
     res.render("homepage", {user:req.session.user,auth:true});
     }
     else{
-        res.render("Register", { user: null, error: null,auth:false });
+        res.render("register", { user: null, error: null,auth:false });
     }
     
 
