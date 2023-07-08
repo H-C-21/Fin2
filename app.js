@@ -78,6 +78,7 @@ app.get("/login", (req, res) => {
 app.get('/upload-course', (req, res) => {
     return res.render('upload-course');
 })
+
 app.get('/register', (req, res) => {
 
      
@@ -177,7 +178,7 @@ app.get("/add-to-wl/:course", async (req, res) => {
         if(user2.purchased.indexOf(courseid) == -1){
         
         await userSchema.findByIdAndUpdate(user2._id,{wishlist:wishlist},{new:true}).then(()=>{
-                    console.log("Added To Wishlist")
+                    
                     res.redirect("/coursedescpage/"+courseid)
                 }
             )}
@@ -370,7 +371,7 @@ app.post('/Create', async (req, res) => {
     const password = req.body.password;
 
     userSchema.findOne({ email:email }).then((user)=>{
-        console.log(user)
+    
         if(!user){
 
         }
@@ -388,7 +389,7 @@ app.get('/coursepage/:courseid/:num', async (req, res) => {
         user12 = req.session.user
         id = req.params.courseid
         num = req.params.num
-        console.log(num)
+      
         
         
 
@@ -576,9 +577,8 @@ app.post('/submit',  (req, res,next) => {
 
    
     if (role == 'user') {    
-        console.log('Please enter')
         teacherSchema.findOne({$or:[{email: email},{username:username}]}).then((teachercollection) => {
-            console.log('Please enter')
+           
             if(!teachercollection){
                 userSchema.findOne({$or:[{email: email},{username:username}]}).then((usercollection) => {
                 if (usercollection){
@@ -587,7 +587,7 @@ app.post('/submit',  (req, res,next) => {
                 return res.redirect('/register')}
                 
                 else {
-                 console.log("}Username already in use")
+                
                         return res.redirect('/register')}}
 
             else {
@@ -680,7 +680,7 @@ app.post('/login', (req, res) => {
             
                 }
                 else{
-                    console.log("Wrong Password");
+                
                     return res.render('./login.ejs', { error: 'Wrong Password.', user: null });
 
                 }
@@ -727,9 +727,9 @@ app.post('/login', (req, res) => {
 
 app.post('/search',async (req,res) => {
    search = req.query.squery
-   console.log(search)
+
    await coursesSchema.find({title:{$regex: /$Met/}}).then((results)=>{
-    console.log(results)
+ 
     res.redirect('/')
    })
 
@@ -748,8 +748,7 @@ app.get('/manage-courses/:id', async (req, res) => {
     res.render('manage-courses', { courses: courses });
 })
 app.get("/logout", (req, res) => {
-    req.session.destroy();
-    console.log('over')
+   
     res.redirect("/")
 
 
