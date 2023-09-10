@@ -1,8 +1,10 @@
 
 /.netlify
 /f
-
+/node_modules
 
 
 
 .env
+/node_modules/@netlify
+node_modules
